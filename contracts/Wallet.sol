@@ -64,12 +64,10 @@ contract Wallet {
     } else {
       _addLayerToMakeTransferToAddLayersMakeTransferQueue(_amountMin, _amountMax);
     }
-
-    // here incoming transfers are going straight to transfers after _addLayer... above
-    // because sendIncoming_Transfer_To_TransfersQueue is false
+    
     // need to be true and while loop not for loop inside move
     // move needs deque
-
+    
     if (numTransfersInTransferQueue > 0) {
       moveTransfersFromTransfersQueueToTransfers();
     }
@@ -167,33 +165,31 @@ contract Wallet {
   // need to take the first one from queue
   // add layers
   // add to transfers
+  // all
+  //
+  // Transfer -> so that they're all in order and ...
+  // Add Layer -> so that layers are the same as when the transfer was made
+  // Remove Layer -> so that layers are the same as when the transfer was made
   function moveTransferFromTransfersQueueToTransfers(
     // by id or index??
   ) private {
     sendIncoming_Transfer_To_TransfersQueue = true;
+    sendIncoming_Add_LayerToMakeTransfer_To_AddLayersToMakeTransferQueue = true;
+    sendIncoming_Remove_LayerToMakeTransfer_To_RemoveLayersToMakeTransferQueue = true;
 
     // ...
 
-    sendIncoming_Transfer_To_TransfersQueue = true;
-
-    // ... ...
-
-
-
-    sendIncomingAddLayerToMakeTransferToAddLayerToMakeTransferQueue = true;
-    sendIncomingRemoveLayerToMakeTransferToRemoveLayerToMakeTransferQueue = true;
-
-    addTransfer(false);
-    deleteTransferFromTransfersQueue();
-
-    sendIncomingAddLayerToMakeTransferToAddLayerToMakeTransferQueue = false;
-    sendIncomingRemoveLayerToMakeTransferToRemoveLayerToMakeTransferQueue = false;
+    sendIncoming_Transfer_To_TransfersQueue = false;
+    sendIncoming_Add_LayerToMakeTransfer_To_AddLayersToMakeTransferQueue = false;
+    sendIncoming_Remove_LayerToMakeTransfer_To_RemoveLayersToMakeTransferQueue = false;
   }
 
-  function deleteTransferFromTransfersQueue(
-    // ...
-  ) private {
-    // ...
+  function enqueueTransferToTransfersQueue() private {
+    //
+  }
+
+  function dequeueTransferFromTransfersQueue() private {
+    //
   }
 
   function addTransferLayers(
