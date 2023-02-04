@@ -1,0 +1,8 @@
+This version cut the extra like TestLog
+
+Make transfer
+Involve layers in the transfer
+And check threads and add locks
+Clean it up and take away extra
+secure the thing and go from there
+less is more
